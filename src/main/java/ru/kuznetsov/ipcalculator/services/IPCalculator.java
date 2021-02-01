@@ -99,12 +99,19 @@ public class IPCalculator {
         StringBuilder ipBin = new StringBuilder();
 
         for (String num : ipDec) {
-            String octetBin = Integer.toBinaryString(Integer.parseInt(num));
+            StringBuilder octet = new StringBuilder(Integer.toBinaryString(Integer.parseInt(num)));
 
-            if (octetBin.equals("0"))
-                octetBin = "00000000";
+            int countNullByAppend = 8 - octet.length();
 
-            ipBin.append(octetBin).append(".");
+            octet.reverse();
+
+            if (octet.length() != 8) {
+                for (int j = 0; j < countNullByAppend; j++) {
+                    octet.append("0");
+                }
+            }
+
+            ipBin.append(octet.reverse()).append(".");
         }
 
         return ipBin.deleteCharAt(ipBin.length() - 1).toString();
@@ -143,12 +150,19 @@ public class IPCalculator {
         StringBuilder maskBin = new StringBuilder();
 
         for (String num : maskDec) {
-            String octetBin = Integer.toBinaryString(Integer.parseInt(num));
+            StringBuilder octet = new StringBuilder(Integer.toBinaryString(Integer.parseInt(num)));
 
-            if (octetBin.equals("0"))
-                octetBin = "00000000";
+            int countNullByAppend = 8 - octet.length();
 
-            maskBin.append(octetBin).append(".");
+            octet.reverse();
+
+            if (octet.length() != 8) {
+                for (int j = 0; j < countNullByAppend; j++) {
+                    octet.append("0");
+                }
+            }
+
+            maskBin.append(octet.reverse()).append(".");
         }
 
         return maskBin.deleteCharAt(maskBin.length() - 1).toString();
@@ -189,12 +203,19 @@ public class IPCalculator {
         StringBuilder wildCardBin = new StringBuilder();
 
         for (String num : wildCardDec) {
-            String octetBin = Integer.toBinaryString(Integer.parseInt(num));
+            StringBuilder octet = new StringBuilder(Integer.toBinaryString(Integer.parseInt(num)));
 
-            if (octetBin.equals("0"))
-                octetBin = "00000000";
+            int countNullByAppend = 8 - octet.length();
 
-            wildCardBin.append(octetBin).append(".");
+            octet.reverse();
+
+            if (octet.length() != 8) {
+                for (int j = 0; j < countNullByAppend; j++) {
+                    octet.append("0");
+                }
+            }
+
+            wildCardBin.append(octet).append(".");
         }
 
         return wildCardBin.deleteCharAt(wildCardBin.length() - 1).toString();
@@ -219,7 +240,17 @@ public class IPCalculator {
                 octet.append(numIpBin * numMaskBin);
             }
 
-            ipAddressBin.append(octet).append(".");
+            int countNullByAppend = 8 - octet.length();
+
+            octet.reverse();
+
+            if (octet.length() != 8) {
+                for (int j = 0; j < countNullByAppend; j++) {
+                    octet.append("0");
+                }
+            }
+
+            ipAddressBin.append(octet.reverse()).append(".");
         }
 
         return ipAddressBin.deleteCharAt(ipAddressBin.length() - 1).toString();
@@ -299,12 +330,18 @@ public class IPCalculator {
         StringBuilder broadcastAddressBin = new StringBuilder();
 
         for (String num : broadcastAddressDec) {
-            String octet = Integer.toBinaryString(Integer.parseInt(num));
+            StringBuilder octet = new StringBuilder(Integer.toBinaryString(Integer.parseInt(num)));
+            int countNullByAppend = 8 - octet.length();
 
-            if (octet.equals("0"))
-                octet = "00000000";
+            octet.reverse();
 
-            broadcastAddressBin.append(octet).append(".");
+            if (octet.length() != 8) {
+                for (int j = 0; j < countNullByAppend; j++) {
+                    octet.append("0");
+                }
+            }
+
+            broadcastAddressBin.append(octet.reverse()).append(".");
         }
 
         return broadcastAddressBin.deleteCharAt(broadcastAddressBin.length() - 1).toString();
@@ -357,16 +394,19 @@ public class IPCalculator {
         String[] firstIpDec = calculateFirstHostIpAddressDec().split("\\.");
         StringBuilder firstIpBin = new StringBuilder();
 
-        for (String octet : firstIpDec) {
-            String octetBin = Integer.toBinaryString(Integer.parseInt(octet));
+        for (String num : firstIpDec) {
+            StringBuilder octet = new StringBuilder(Integer.toBinaryString(Integer.parseInt(num)));
+            int countNullByAppend = 8 - octet.length();
 
-            if (octetBin.equals("0"))
-                octetBin = "00000000";
-            else if (octetBin.equals("1")) {
-                octetBin = "00000001";
+            octet.reverse();
+
+            if (octet.length() != 8) {
+                for (int j = 0; j < countNullByAppend; j++) {
+                    octet.append("0");
+                }
             }
 
-            firstIpBin.append(octetBin).append(".");
+            firstIpBin.append(octet.reverse()).append(".");
         }
 
         return firstIpBin.deleteCharAt(firstIpBin.length() - 1).toString();
@@ -404,16 +444,19 @@ public class IPCalculator {
         String[] lastIpDec = calculateLastHostIpAddressDec().split("\\.");
         StringBuilder lastIpBin = new StringBuilder();
 
-        for (String octet : lastIpDec) {
-            String octetBin = Integer.toBinaryString(Integer.parseInt(octet));
+        for (String num : lastIpDec) {
+            StringBuilder octet = new StringBuilder(Integer.toBinaryString(Integer.parseInt(num)));
+            int countNullByAppend = 8 - octet.length();
 
-            if (octetBin.equals("0"))
-                octetBin = "00000000";
-            else if (octetBin.equals("1")) {
-                octetBin = "00000001";
+            octet.reverse();
+
+            if (octet.length() != 8) {
+                for (int j = 0; j < countNullByAppend; j++) {
+                    octet.append("0");
+                }
             }
 
-            lastIpBin.append(octetBin).append(".");
+            lastIpBin.append(octet.reverse()).append(".");
         }
 
         return lastIpBin.deleteCharAt(lastIpBin.length() - 1).toString();
