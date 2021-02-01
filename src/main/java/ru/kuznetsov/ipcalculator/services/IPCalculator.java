@@ -1,30 +1,28 @@
 package ru.kuznetsov.ipcalculator.services;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class IPCalculator {
-    private Map<Integer, Integer> validSeqLastOctet;
+    private Map<Integer, Integer> validSeqOctet;
     private String ipv4Decimal;
     private String maskDecimal;
     private Map<String, String[]> networkCharacteristics;
 
     {
-        validSeqLastOctet = new HashMap<>();
-        validSeqLastOctet.put(0, 0);
-        validSeqLastOctet.put(128, 1);
-        validSeqLastOctet.put(192, 2);
-        validSeqLastOctet.put(224, 3);
-        validSeqLastOctet.put(240, 4);
-        validSeqLastOctet.put(248, 5);
-        validSeqLastOctet.put(252, 6);
-        validSeqLastOctet.put(254, 7);
-        validSeqLastOctet.put(255, 8);
+        validSeqOctet = new HashMap<>();
+        validSeqOctet.put(0, 0);
+        validSeqOctet.put(128, 1);
+        validSeqOctet.put(192, 2);
+        validSeqOctet.put(224, 3);
+        validSeqOctet.put(240, 4);
+        validSeqOctet.put(248, 5);
+        validSeqOctet.put(252, 6);
+        validSeqOctet.put(254, 7);
+        validSeqOctet.put(255, 8);
     }
 
     public IPCalculator() {
@@ -278,7 +276,7 @@ public class IPCalculator {
                 }
             }
 
-            int quantityBit = validSeqLastOctet.get(Integer.parseInt(maskOctet));
+            int quantityBit = validSeqOctet.get(Integer.parseInt(maskOctet));
 
             for (int j = 0; j < ipOctet.length() - quantityBit; j++) {
                 ipOctet.replace(j, j + 1, "1");
